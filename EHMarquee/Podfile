@@ -1,0 +1,5 @@
+platform :ios, "7.0"
+
+target "EHMarqueeExample" do
+  pod "EHMarquee", :path => "../EHMarquee.podspec"
+end

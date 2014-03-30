@@ -1,0 +1,14 @@
+PODS:
+  - EHMarquee (0.0.0)
+
+DEPENDENCIES:
+  - EHMarquee (from `../EHMarquee.podspec`)
+
+EXTERNAL SOURCES:
+  EHMarquee:
+    :path: ../EHMarquee.podspec
+
+SPEC CHECKSUMS:
+  EHMarquee: 9f381a085f272146c0eb8f6a98cae764c0408b51
+
+COCOAPODS: 0.29.0
