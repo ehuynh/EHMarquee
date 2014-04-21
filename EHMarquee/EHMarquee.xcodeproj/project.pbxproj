@@ -20,6 +20,8 @@
 		EF3D7D2118E7AF5200A794D9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF3D7D0918E7AF5200A794D9 /* UIKit.framework */; };
 		EF3D7D2918E7AF5200A794D9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF3D7D2718E7AF5200A794D9 /* InfoPlist.strings */; };
 		EF3D7D2B18E7AF5200A794D9 /* EHMarqueeExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3D7D2A18E7AF5200A794D9 /* EHMarqueeExampleTests.m */; };
+		EF3D7D4018E7D08B00A794D9 /* ExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF3D7D3F18E7D08B00A794D9 /* ExampleViewController.m */; };
+		EF97FA2C19053C820051A9BA /* UILabel+EHClone.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97FA2B19053C820051A9BA /* UILabel+EHClone.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,12 @@
 		EF3D7D2618E7AF5200A794D9 /* EHMarqueeExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EHMarqueeExampleTests-Info.plist"; sourceTree = "<group>"; };
 		EF3D7D2818E7AF5200A794D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EF3D7D2A18E7AF5200A794D9 /* EHMarqueeExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EHMarqueeExampleTests.m; sourceTree = "<group>"; };
+		EF3D7D3A18E7D00500A794D9 /* EHMarqueeContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EHMarqueeContainerView.h; sourceTree = "<group>"; };
+		EF3D7D3B18E7D00500A794D9 /* EHMarqueeContainerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EHMarqueeContainerView.m; sourceTree = "<group>"; };
+		EF3D7D3E18E7D08B00A794D9 /* ExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleViewController.h; sourceTree = "<group>"; };
+		EF3D7D3F18E7D08B00A794D9 /* ExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleViewController.m; sourceTree = "<group>"; };
+		EF97FA2A19053C820051A9BA /* UILabel+EHClone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+EHClone.h"; sourceTree = "<group>"; };
+		EF97FA2B19053C820051A9BA /* UILabel+EHClone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+EHClone.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +122,7 @@
 		EF3D7D0B18E7AF5200A794D9 /* EHMarqueeExample */ = {
 			isa = PBXGroup;
 			children = (
+				EF3D7D3C18E7D04D00A794D9 /* ViewControllers */,
 				EF3D7D1418E7AF5200A794D9 /* AppDelegate.h */,
 				EF3D7D1518E7AF5200A794D9 /* AppDelegate.m */,
 				EF3D7D1718E7AF5200A794D9 /* Images.xcassets */,
@@ -154,8 +163,21 @@
 		EF3D7D3318E7B80500A794D9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				EF3D7D3A18E7D00500A794D9 /* EHMarqueeContainerView.h */,
+				EF3D7D3B18E7D00500A794D9 /* EHMarqueeContainerView.m */,
+				EF97FA2A19053C820051A9BA /* UILabel+EHClone.h */,
+				EF97FA2B19053C820051A9BA /* UILabel+EHClone.m */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		EF3D7D3C18E7D04D00A794D9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EF3D7D3E18E7D08B00A794D9 /* ExampleViewController.h */,
+				EF3D7D3F18E7D08B00A794D9 /* ExampleViewController.m */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,8 +309,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF3D7D4018E7D08B00A794D9 /* ExampleViewController.m in Sources */,
 				EF3D7D1618E7AF5200A794D9 /* AppDelegate.m in Sources */,
 				EF3D7D1218E7AF5200A794D9 /* main.m in Sources */,
+				EF97FA2C19053C820051A9BA /* UILabel+EHClone.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
