@@ -30,11 +30,28 @@ static const CGFloat labelSpacing = 40.0f;
     
     if (self)
     {
-        self.clipsToBounds = YES;
-        self.scrollDuration = -1.0f;
-        self.beginScrollDelay = 1.0f;
+        [self commonInit];
     }
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    
+    if (self)
+    {
+        [self commonInit];
+    }
+    
+    return self;
+}
+
+- (void)commonInit
+{
+    self.clipsToBounds = YES;
+    self.scrollDuration = -1.0f;
+    self.beginScrollDelay = 1.0f;
 }
 
 #pragma mark - UIView
