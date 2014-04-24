@@ -10,6 +10,10 @@
 
 @interface UILabel (EHClone)
 
+/**
+ Creates and returns a clone of the receiver
+ @return a clone of the receiver
+ */
 - (UILabel *)ehClone;
 
 @end

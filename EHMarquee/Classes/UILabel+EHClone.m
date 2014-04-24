@@ -12,6 +12,8 @@
 
 - (UILabel *)ehClone
 {
+    // turns out a quick way to create a clone is to just archive and unarchive the receiver
+    // See http://stackoverflow.com/a/13756101/666943
     return [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:self]];
 }
 

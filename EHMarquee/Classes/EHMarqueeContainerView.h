@@ -10,7 +10,14 @@
 
 @interface EHMarqueeContainerView : UIView
 
+/**
+ label that we scrolled across the view
+ */
 @property (nonatomic, strong) UILabel *contentLabel;
+
+/**
+ duration for the label to scroll completely across the view
+ */
 @property (nonatomic) CGFloat scrollDuration;
 
 @end
