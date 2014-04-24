@@ -69,7 +69,7 @@ static void * ContentLabelKVOContext = &ContentLabelKVOContext;
     }
 }
 
-#pragma makr - Content Label
+#pragma mark - Content Label
 
 - (void)setContentLabel:(UILabel *)contentLabel
 {
