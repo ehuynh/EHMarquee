@@ -12,13 +12,14 @@
 
 static const CGFloat pointsPerSecond = 30.0f;
 static const CGFloat labelSpacing = 40.0f;
+static void * ContentLabelKVOContext = &ContentLabelKVOContext;
 
 @interface EHMarqueeContainerView ()
 
 @property (nonatomic, weak) NSLayoutConstraint *hContentLabelConstraint;
 @property (nonatomic) CGFloat beginScrollDelay;
 @property (nonatomic, strong) NSTimer *startScrollingTimer;
-@property (nonatomic, strong) UILabel *contentLabelClone;
+@property (nonatomic, weak) UILabel *contentLabelClone;
 
 @end
 
@@ -72,9 +73,14 @@ static const CGFloat labelSpacing = 40.0f;
 
 - (void)setContentLabel:(UILabel *)contentLabel
 {
+    [self stopObservingContentLabel];
+    [self removeContentLabelClone];
+    
+    [_contentLabel removeFromSuperview];
     _contentLabel = contentLabel;
     
     [self addContentLabel:contentLabel];
+    [self observeContentLabel];
 }
 
 - (void)addContentLabel:(UILabel *)contentLabel
@@ -137,7 +143,21 @@ static const CGFloat labelSpacing = 40.0f;
                                                                    views:views]];
 }
 
+- (void)removeContentLabelClone
+{
+    [self.contentLabelClone removeFromSuperview];
+    self.contentLabelClone = nil;
+}
+
 #pragma mark - Scrolling
+
+- (void)rescheduleScrolling
+{
+    if ([self shouldScroll] && ![self.startScrollingTimer isValid])
+    {
+        [self scheduleScrolling];
+    }
+}
 
 - (void)scheduleScrolling
 {
@@ -169,13 +189,64 @@ static const CGFloat labelSpacing = 40.0f;
                      completion:^(BOOL finished)
      {
          self.hContentLabelConstraint.constant = 0;
-         [self scheduleScrolling];
+         
+         [self rescheduleScrolling];
      }];
+}
+
+/**
+ Cancels any inprogress scrolling animation and resets the ContentLabel position
+ */
+- (void)resetContentLabelToStartingPosition
+{
+    self.hContentLabelConstraint.constant = 0;
+    
+    // animate the change over 0.0f duration to cancel any inprogress animation
+    [UIView animateWithDuration:0.0f animations:^
+     {
+         [self layoutIfNeeded];
+     }
+                     completion:nil];
 }
 
 - (BOOL)shouldScroll
 {
     return self.contentLabel.bounds.size.width > self.bounds.size.width;
+}
+
+#pragma mark - KVO
+
+- (void)observeContentLabel
+{
+    [self.contentLabel addObserver:self
+                        forKeyPath:NSStringFromSelector(@selector(text)) 
+                           options:NSKeyValueObservingOptionNew
+                           context:ContentLabelKVOContext];
+}
+
+- (void)stopObservingContentLabel
+{
+    [self.contentLabel removeObserver:self
+                           forKeyPath:NSStringFromSelector(@selector(text))
+                              context:ContentLabelKVOContext];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(text))] && ContentLabelKVOContext)
+    {
+        [self contentLabelChanged];
+    }
+}
+
+- (void)contentLabelChanged
+{
+    [self removeContentLabelClone];
+    [self.startScrollingTimer invalidate];
+    [self resetContentLabelToStartingPosition];
 }
 
 @end

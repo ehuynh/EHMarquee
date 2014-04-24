@@ -10,7 +10,12 @@
 
 #import <EHMarquee/EHMarqueeContainerView.h>
 
+static NSString *shortText = @"Short amount of text.";
+static NSString *longText = @"Looooong amount of text that needs scrolling.";
+
 @interface ExampleViewController ()
+
+@property (nonatomic, weak) UILabel *changingContentLabel;
 
 @end
 
@@ -32,6 +37,13 @@
     EHMarqueeContainerView *marqueeContainerView04 = [self createMarqueeContainerView];
     EHMarqueeContainerView *marqueeContainerView05 = [self createMarqueeContainerView];
     EHMarqueeContainerView *marqueeContainerView06 = [self createMarqueeContainerView];
+    EHMarqueeContainerView *marqueeContainerView07 = [self createMarqueeContainerView];
+
+    UIButton *changingLabelContentButton = [[UIButton alloc] init];
+    [changingLabelContentButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    changingLabelContentButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [changingLabelContentButton setTitle:@"Change Text of above label" forState:UIControlStateNormal];
+    [changingLabelContentButton addTarget:self action:@selector(changeLabelContent) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:marqueeContainerView01];
     [self.view addSubview:marqueeContainerView02];
@@ -39,15 +51,19 @@
     [self.view addSubview:marqueeContainerView04];
     [self.view addSubview:marqueeContainerView05];
     [self.view addSubview:marqueeContainerView06];
+    [self.view addSubview:marqueeContainerView07];
+    [self.view addSubview:changingLabelContentButton];
     
     NSDictionary *views = NSDictionaryOfVariableBindings(marqueeContainerView01,
                                                          marqueeContainerView02,
                                                          marqueeContainerView03,
                                                          marqueeContainerView04,
                                                          marqueeContainerView05,
-                                                         marqueeContainerView06);
+                                                         marqueeContainerView06,
+                                                         marqueeContainerView07,
+                                                         changingLabelContentButton);
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[marqueeContainerView01]-[marqueeContainerView02]-[marqueeContainerView03]-[marqueeContainerView04]-[marqueeContainerView05]-[marqueeContainerView06]"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[marqueeContainerView01]-[marqueeContainerView02]-[marqueeContainerView03]-[marqueeContainerView04]-[marqueeContainerView05]-[marqueeContainerView06]-[marqueeContainerView07]-[changingLabelContentButton]"
                                                                       options:NSLayoutFormatAlignAllLeft|NSLayoutFormatAlignAllRight
                                                                       metrics:nil
                                                                         views:views]];
@@ -84,6 +100,11 @@
     bigContentWithCustomFontLabel.text = @"Bigger looooong amount of text that needs scrolling.";
     bigContentWithCustomFontLabel.font = [UIFont systemFontOfSize:24];
     marqueeContainerView06.contentLabel = bigContentWithCustomFontLabel;
+    
+    UILabel *changingContentLabel = [[UILabel alloc] init];
+    changingContentLabel.text = shortText;
+    marqueeContainerView07.contentLabel = changingContentLabel;
+    self.changingContentLabel = changingContentLabel;
 }
 
 #pragma mark - EHMarqueeContainerView
@@ -95,6 +116,20 @@
     marqueeContainerView.translatesAutoresizingMaskIntoConstraints = NO;
     
     return marqueeContainerView;
+}
+
+#pragma mark - Target Action
+
+- (void)changeLabelContent
+{
+    if ([self.changingContentLabel.text isEqualToString:shortText])
+    {
+        self.changingContentLabel.text = longText;
+    }
+    else
+    {
+        self.changingContentLabel.text = shortText;
+    }
 }
 
 @end
