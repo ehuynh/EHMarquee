@@ -126,7 +126,7 @@ static void * ContentLabelKVOContext = &ContentLabelKVOContext;
 
 - (void)createContentLabelClone
 {
-    UILabel *contentLabelClone = [self.contentLabel ehClone];
+    UILabel *contentLabelClone = [self.contentLabel eh_clone];
     [self addSubview:contentLabelClone];
     self.contentLabelClone = contentLabelClone;
 }
