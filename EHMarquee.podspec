@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "EHMarquee"
   s.version          = "0.0.0"
-  s.summary          = "EHMarquee helps create an automatic scrolling view for content that is larger than its container."
+  s.summary          = "EHMarquee helps create an automatic scrolling UILabel for text that is larger than its container."
   s.homepage         = "https://github.com/ehuynh/EHMarquee"
   s.license          = 'MIT'
   s.author           = { "Edward Huynh" => "edward@edwardhuynh.com" }
